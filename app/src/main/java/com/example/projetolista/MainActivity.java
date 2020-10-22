@@ -1,5 +1,7 @@
 package com.example.projetolista;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Produtos);
         listadeProdutos.setAdapter(adapterProdutos);
         registerForContextMenu(listadeProdutos);
+        definirOnClickListenerDelete();
 
 
 
@@ -63,10 +66,21 @@ public class MainActivity extends AppCompatActivity {
               listadeProdutos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                   @Override
                   public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                      Produtos produtoClick = adapterProdutos.getItem(position);
-                      adapterProdutos.remove(produtoClick);
-                      adapterProdutos.notifyDataSetChanged();
-                      Toast.makeText(MainActivity.this,"Produto Deletado", Toast.LENGTH_LONG).show();
+                      final Produtos produtoClick = adapterProdutos.getItem(position);
+                      new AlertDialog.Builder(MainActivity.this)
+                              .setIcon(android.R.drawable.ic_delete)
+                              .setTitle("Desejar Deletar?")
+                              .setMessage("Deseja deletar esse item?")
+                              .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                  @Override
+                                  public void onClick(DialogInterface dialog, int which) {
+                                      adapterProdutos.remove(produtoClick);
+                                      adapterProdutos.notifyDataSetChanged();
+                                      Toast.makeText(MainActivity.this,"Produto Deletado", Toast.LENGTH_LONG).show();
+                                  }
+                              })
+                              .setNegativeButton("Não",null).show();
+
 
                       return true;
                   }
