@@ -1,17 +1,18 @@
 package com.example.projetolista;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetolista.modelo.Produtos;
 
 public class CadatroProdutosActivit extends AppCompatActivity {
    private final int RESULTADO_NOVO_PRODUTO =10;
    private final int RESULTADO_EDICAO = 11;
+
 
    private boolean edicao = false;
    private int id = 0;
@@ -44,6 +45,7 @@ public class CadatroProdutosActivit extends AppCompatActivity {
     public void onClickVoltar(View v){
         finish();
     }
+
 
     public void onClickSalvar(View v){
         EditText editTextnome =findViewById(R.id.editText_nome);
